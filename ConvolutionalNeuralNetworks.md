@@ -17,14 +17,14 @@ Section
     * [The Max-pooling Operation](#12)
 * [Cats and Dogs](#2)
     * [Data preparation](#21)
-* [Data Augmentation](#part3) 
+* [Data Augmentation](#3) 
 * [References and Acknowledgements](#references)
 
 
 <a id='1'></a>
 ## 1 - MNIST
 
-<a id='part11'></a>
+<a id='11'></a>
 ### 1.1 - The Convolution Operation
 
 We use a Convolutional Neural Net (CNN) to operate on the MNIST dataset.
