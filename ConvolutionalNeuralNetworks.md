@@ -1,4 +1,4 @@
-# Convolutional Neural Nets
+
 
 This Learn-by-building will cover the following topics:
 
@@ -148,7 +148,7 @@ Convolutions are defined by two key parameters:
 
 In Keras `Conv2D` layers, these parameters are the first arguments passed to the layer: `Conv2D(output_depth, (window_height, window_width))`.
 
-A convolution works by *sliding* these windows of size $3 \times 3$ or $5 \times 5$ over the 3D input feature map, stopping at every possible location, and extracting the 3D patch of surrounding features (shape `(window_height, window_width, input_depth)`). Each such 3D patch is then transformed (via a tensor product with the same learned weight matrix, called the *convolution kernel* ) into a 1D vector of shape `(output_depth,)`. All of these vectors are then spatially reassembled into a 3D output map of shape `(height, width, output_depth)`. Every spatial location in the output feature map corresponds to the same location in the input feature map (for example, the lower-right corner of the output contains information about the lower-right corner of the input). For instance, with $3 \times 3$ windows, the vector `output[i, j, :]` comes from the 3D patch `input[i-1:i+1,j-1:j+1,:]`. In the convnet, we may have noticed that the size of the feature maps is halved after every `MaxPooling2D` layer. For instance, before the first `MaxPooling2D` layers, the feature map is $26 \times 26$, but the max-pooling operation halves it to $13 \times 13$. That’s the role of max pooling: to aggressively **downsample** feature maps.
+A convolution works by *sliding* these windows of size 3 \times 3 or 5 \times 5 over the 3D input feature map, stopping at every possible location, and extracting the 3D patch of surrounding features (shape `(window_height, window_width, input_depth)`). Each such 3D patch is then transformed (via a tensor product with the same learned weight matrix, called the *convolution kernel* ) into a 1D vector of shape `(output_depth,)`. All of these vectors are then spatially reassembled into a 3D output map of shape `(height, width, output_depth)`. Every spatial location in the output feature map corresponds to the same location in the input feature map (for example, the lower-right corner of the output contains information about the lower-right corner of the input). For instance, with $3 \times 3$ windows, the vector `output[i, j, :]` comes from the 3D patch `input[i-1:i+1,j-1:j+1,:]`. In the convnet, we may have noticed that the size of the feature maps is halved after every `MaxPooling2D` layer. For instance, before the first `MaxPooling2D` layers, the feature map is 26 \times 26, but the max-pooling operation halves it to $13 \times 13$. That’s the role of max pooling: to aggressively **downsample** feature maps.
 
 Max pooling consists of extracting windows from the input feature maps and outputting the max value of each channel. It is conceptually similar to convolution, except that instead of transforming local patches via a learned linear transformation (the convolution kernel), they are transformed via a hardcoded `max` tensor operation. A big difference from convolution is that max pooling is usually done with $2 \times 2$ windows and stride 2, in order to downsample the feature maps by a factor of 2. On the other hand, convolution is typically done with $3 \times 3$ windows and no stride (stride 1).
 
@@ -198,21 +198,6 @@ print('total test cat images:', len(os.listdir(test_cats_dir)))
 print('total test dog images:', len(os.listdir(test_dogs_dir))) 
 
 ```
-
-
-    ---------------------------------------------------------------------------
-
-    FileNotFoundError                         Traceback (most recent call last)
-
-    <ipython-input-4-97a85ec00aa6> in <module>
-         14 test_dogs_dir = os.path.join(test_dir, 'dogs')
-         15 
-    ---> 16 print('total training cat images:', len(os.listdir(train_cats_dir)))
-         17 print('total training dog images:', len(os.listdir(train_dogs_dir)))
-         18 print('total validation cat images:', len(os.listdir(validation_cats_dir)))
-    
-
-    FileNotFoundError: [WinError 3] The system cannot find the path specified: 'cats_and_dogs_small\\train\\cats'
 
 
 We do indeed have 2,000 training images, 1,000 validation images, and 1,000 test images. Each split contains the same number of samples from each class: this is a balanced binary-classification problem, which means classification accuracy will be an appropriate measure of success.
@@ -395,19 +380,19 @@ plt.show()
 ```
 
 
-![png](output_31_0.png)
+![output_31_0](output_31_0.png)
 
 
 
-![png](output_31_1.png)
+![output_31_1](output_31_1.png)
 
 
 
-![png](output_31_2.png)
+![output_31_2](output_31_2.png)
 
 
 
-![png](output_31_3.png)
+![output_31_3](output_31_3.png)
 
 
 If we train a new network using this data-augmentation configuration, the network will never see the same input twice. But the inputs it sees are highly intercorrelated, because they come from a small number of original images. To further fight overfitting, we will add a `Dropout` layer to our model, right before the densely connected classifier.
@@ -499,6 +484,3 @@ By using regularization techniques even further, and by tuning the network’s p
 * [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python), Chapter 5 written by the Francois Chollet, the author of Keras. 
 
 
-```python
-
-```
